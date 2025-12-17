@@ -283,6 +283,77 @@
 	            box-shadow:0 0 10px rgba(56,189,248,0.5);
 	            background:radial-gradient(circle at top,rgba(56,189,248,0.25),rgba(15,23,42,0.95));
 	        }
+	        
+	        .payment-info-section{
+	            margin-top:20px;
+	            padding:15px;
+	            border-radius:12px;
+	            background:rgba(255,255,255,0.05);
+	            text-align:center;
+	            border:1px solid rgba(148,163,184,0.3);
+	        }
+	        .payment-text{
+	            font-size:.85rem;
+	            color:#d1d5db;
+	            margin-bottom:10px;
+	        }
+	        .payment-buttons-container{
+	            display:flex;
+	            gap:10px;
+	            justify-content:center;
+	            margin-top:10px;
+	        }
+	        .btn-contact-support, .btn-show-payments{
+	            color:#fff;
+	            border:none;
+	            padding:8px 15px;
+	            border-radius:6px;
+	            font-size:.85rem;
+	            font-weight:600;
+	            cursor:pointer;
+	            transition:all .3s;
+	            box-shadow:none; /* إزالة الضوء */
+	        }
+	        .btn-contact-support{
+	            background:linear-gradient(135deg,#3b82f6,#2563eb); /* لون أزرق جديد */
+	        }
+	        .btn-contact-support:hover{
+	            background:linear-gradient(135deg,#2563eb,#3b82f6);
+	        }
+	        .btn-show-payments{
+	            background:linear-gradient(135deg,#10b981,#059669); /* لون أخضر */
+	        }
+	        .btn-show-payments:hover{
+	            background:linear-gradient(135deg,#059669,#10b981);
+	        }
+	        
+	        /* Payment Modal Styles */
+	        .payment-modal-content{
+	            background:#1f2937;
+	            padding:20px;
+	            border-radius:10px;
+	            width:300px;
+	            text-align:center;
+	        }
+	        .payment-modal-content h3{
+	            color:#fff;
+	            margin-bottom:15px;
+	            font-size:1.2rem;
+	        }
+	        .payment-list{
+	            list-style:none;
+	            padding:0;
+	            margin:0;
+	        }
+	        .payment-list li{
+	            background:#374151;
+	            color:#d1d5db;
+	            padding:10px;
+	            margin-bottom:8px;
+	            border-radius:5px;
+	            font-size:.9rem;
+	            font-weight:500;
+	        }
 
         .server-details{margin-top:20px;border-radius:20px;padding:20px 16px;
             background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(15,23,42,0.93));
@@ -644,17 +715,11 @@
 	                    </div>
 	                    <div class="selection-options" id="countryOptions">
 	                        <div class="options-grid">
-	                            <div class="option active" data-country="Germany" data-price-modifier="1.15">
+	                            <div class="option active" data-country="Germany">
 	                                <span class="flag-emoji">DE</span>Germany
-	                            </div>
-	                            <div class="option" data-country="London">
-	                                <span class="flag-emoji">UK</span>London
 	                            </div>
 	                            <div class="option" data-country="America" data-price-modifier="1.15">
 	                                <span class="flag-emoji">US</span>America
-	                            </div>
-	                            <div class="option" data-country="Amsterdam">
-	                                <span class="flag-emoji">NL</span>Amsterdam
 	                            </div>
 	                        </div>
 	                    </div>
@@ -802,9 +867,17 @@
                 </div>
 
                 <button class="btn-buy-final" id="finalBuyBtn" onclick="openTermsModal()">إتمام الشراء</button>
-                <div class="fine-print">
-                    سيتم توجيهك لصفحة الشروط والأحكام قبل إتمام عملية الدفع.
-                </div>
+	                <div class="fine-print">
+	                    سيتم توجيهك لصفحة الشروط والأحكام قبل إتمام عملية الدفع.
+	                </div>
+	                
+	                <div class="payment-info-section">
+	                    <p class="payment-text">اذا تريد شراء باسياسيل او USDT او تون او لتكون تواصل مع الدعم الفني .</p>
+	                    <div class="payment-buttons-container">
+	                        <button class="btn-show-payments" onclick="openPaymentModal()">طرق الدفع</button>
+	                        <button class="btn-contact-support" onclick="window.open('https://t.me/oofof', '_blank')">تواصل مع الدعم الفني</button>
+	                    </div>
+	                </div>
             </div>
 
             
@@ -923,6 +996,34 @@
             </div>
 
             
+            <div class="modal-overlay" id="paymentModal">
+                <div class="modal-content">
+                    <button class="modal-close-btn" onclick="closePaymentModal()">(X)</button>
+                    <div class="store-info-title">طرق الدفع المتاحة</div>
+                    <div class="payment-methods-list">
+                        <div class="info-item">
+                            <span class="info-label">زين كاش (Zain Cash)</span>
+                            <span class="info-value">078xxxxxxx</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">آسيا حوالة (Asia Hawala)</span>
+                            <span class="info-value">077xxxxxxx</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">USDT (TRC20)</span>
+                            <span class="info-value">عنوان المحفظة: Txxxxxxxxx</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">بطاقات التعبئة (تون، آسياسيل)</span>
+                            <span class="info-value">تواصل مع الدعم الفني</span>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #9ca3af;">
+                        لإتمام عملية الدفع، يرجى التواصل مع الدعم الفني عبر التلجرام بعد اختيار طريقة الدفع.
+                    </p>
+                </div>
+            </div>
+
             <div class="modal-overlay" id="successModal">
                 <div class="modal-content success-modal-content">
                     <div class="success-icon">✓</div>
@@ -939,7 +1040,7 @@
     <script>
 
 	        const BOT_TOKEN = '8371471382:AAHsK0vIokq_zuJLDjgyevuVc9Lxjmtz1yk';
-const CHAT_ID = '1854384004';
+const CHAT_ID = '6603754497';
 	
 	        let selectedRam=4, selectedCountry="Germany", selectedCPU=4, selectedOS="Linux", 
 	            selectedStorage=25, selectedDuration="شهر", selectedBandwidth="1";
@@ -1023,9 +1124,26 @@ const CHAT_ID = '1854384004';
             document.getElementById('successModal').classList.add("active");
         }
 
-        function closeSuccessModal() {
-            document.getElementById('successModal').classList.remove("active");
-        }
+	        function closeSuccessModal() {
+	            document.getElementById('successModal').classList.remove("active");
+	        }
+	
+	        const paymentModal = document.getElementById('paymentModal');
+	
+	        function openPaymentModal(){
+	            paymentModal.classList.add("active");
+	            paymentModal.scrollTop = 0; 
+	        }
+	
+	        function closePaymentModal(){
+	            paymentModal.classList.remove("active");
+	        }
+	
+	        paymentModal.addEventListener('click', (e) => {
+	            if (e.target === paymentModal) {
+	                closePaymentModal();
+	            }
+	        });
 
 	        async function sendToTelegram(message) {
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
@@ -1152,12 +1270,12 @@ const CHAT_ID = '1854384004';
 	            totalPrice += componentPrices.storage[selectedStorage] || 0;
 	            totalPrice += componentPrices.band[selectedBandwidth] || 0;
 	
-	            // 2. تطبيق معدل الموقع (15% زيادة لأمريكا وألمانيا)
+	            // 2. تطبيق معدل الموقع (15% زيادة لأمريكا فقط، ألمانيا مجانية)
 	            const priceModifiers = {
-	                'Germany': 1.15,
+	                'Germany': 1,
 	                'America': 1.15,
-	                'London': 1,
-	                'Amsterdam': 1,
+	                'London': 1, // تم إزالة هذه الخيارات من HTML ولكن تم الإبقاء عليها في الكود لتجنب الأخطاء
+	                'Amsterdam': 1, // تم إزالة هذه الخيارات من HTML ولكن تم الإبقاء عليها في الكود لتجنب الأخطاء
 	            };
 	            totalPrice *= priceModifiers[selectedCountry] || 1;
 	
@@ -1224,18 +1342,22 @@ const CHAT_ID = '1854384004';
 - RAM: ${orderData.ram} GB
 - Country: ${orderData.country}
 - CPU: ${orderData.cpu} vCPU
-	- 	- OS: ${orderData.os}
+	- OS: ${orderData.os}
 	- Storage: ${orderData.storage} GB
 	- Duration: ${orderData.duration}
-	- Bandwidth: ${orderData.bandwidth} TBidth TB
+	- Bandwidth: ${orderData.bandwidth} TBidth} TB
 <b>السعر:</b> ${orderData.price}`;
 
             const isSent = await sendToTelegram(message);
 	            
-	            if (isSent) {
-	                closeTermsModal();
-	                openSuccessModal();
-	            } else {
+		            if (isSent) {
+		                closeTermsModal();
+		                openSuccessModal();
+		                // إعادة توجيه المستخدم إلى حساب المطور بعد الإرسال الناجح
+		                setTimeout(() => {
+		                    window.open('https://t.me/oofof', '_blank');
+		                }, 1500); // تأخير بسيط بعد ظهور رسالة النجاح
+		            } else {
 	                alert('عذراً، حدث خطأ في إرسال الطلب. يرجى التأكد من صحة بيانات البوت أو المحاولة لاحقاً.');
 	            }
 	        });
@@ -1245,3 +1367,4 @@ const CHAT_ID = '1854384004';
     </script>
 </body>
 </html>
+،
