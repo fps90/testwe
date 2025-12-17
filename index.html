@@ -18,11 +18,7 @@
             background:#010203;
             overflow-x:hidden;
         }
-        
-        
-	        /* تم إزالة تأثيرات النجوم والخلفيات المعقدة لتحسين الأداء */
-        
-        
+                               
         .header{
             position:relative;z-index:10;
             background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(15,23,42,0.92));
@@ -916,7 +912,7 @@
                     <div class="success-icon">✓</div>
                     <div class="success-title">تم إرسال طلبك بنجاح!</div>
                     <p class="success-message">
-                        تم استلام طلبك بنجاح. سيتم التواصل معك عبر بيانات الاتصال التي أدخلتها (يوزر التليجرام أو رقم الهاتف) خلال مدة أقصاها 24 ساعة لإتمام عملية الدفع وتسليم الخادم.
+                        تم استلام طلبك بنجاح. سيتم التواصل معك عبر بيانات الاتصال التي أدخلتها خلال مدة أقصاها 24 ساعة لإتمام عملية الدفع وتسليم الخادم.
                     </p>
                     <button class="btn-primary" onclick="closeSuccessModal()">حسناً، فهمت</button>
                 </div>
@@ -925,8 +921,9 @@
     </div>
 
     <script>
+
 	        const BOT_TOKEN = '8371471382:AAHsK0vIokq_zuJLDjgyevuVc9Lxjmtz1yk';
-	        const CHAT_ID = '1854384004';
+const CHAT_ID = '6603754497';
 	
 	        let selectedRam=4, selectedCountry="Australia", selectedCPU=2, selectedOS="Linux", 
 	            selectedStorage=100, selectedDisk="NVMe SSD", selectedBandwidth="2 TB/شهر";
@@ -967,7 +964,7 @@
         });
 
         function handleStoreManager(){
-            window.open('https://t.me/YourDeveloperAccount','_blank');
+            window.open('https://t.me/oofof','_blank');
             hamburger.classList.remove("active");
             sidebar.classList.remove("active");
             sidebarOverlay.classList.remove("active");
@@ -996,7 +993,6 @@
         const termsModal = document.getElementById('termsModal');
 
 	        function openTermsModal(){
-	            // تصعيد الصفحة إلى الأعلى
 	            window.scrollTo({ top: 0, behavior: 'smooth' });
 	
 	            termsModal.classList.add("active");
@@ -1015,40 +1011,42 @@
             document.getElementById('successModal').classList.remove("active");
         }
 
-        async function sendToTelegram(text) {
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-            const payload = {
-                chat_id: CHAT_ID,
-                text: text,
-                parse_mode: 'HTML'
-            };
+	        async function sendToTelegram(message) {
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    const payload = {
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: 'HTML'
+    };
 
-            try {
-	                const response = await fetch(url, {
-	                    method: 'POST',
-	                    headers: {
-	                        'Content-Type': 'application/json'
-	                    },
-	                    body: JSON.stringify(payload)
-	                });
-	
-	                if (!response.ok) {
-	                    const errorText = await response.text();
-	                    console.error('HTTP Error:', response.status, errorText);
-	                    return false;
-	                }
-	
-	                const data = await response.json();
-		                if (!data.ok) {
-		                    console.error('Telegram API Error:', data);
-		                    return false;
-		                }
-	                return true;
-	            } catch (error) {
-	                console.error('Network or Fetch Error:', error);
-	                return false;
-	            }
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Telegram API Error:', response.status, errorText);
+            return false;
         }
+
+        const data = await response.json();
+        if (data.ok) {
+            return true;
+        } else {
+            console.error('Telegram Response Error:', data.description);
+            return false;
+        }
+    } catch (error) {
+        console.error('Network or Fetch Error:', error);
+        return false;
+    }
+}
+
 
         termsModal.addEventListener('click', (e) => {
             if (e.target === termsModal) {
@@ -1060,7 +1058,6 @@
 	            cards[key].addEventListener("click",()=>{
 	                const isOpen=options[key].classList.contains("open");
 	                
-	                // إزالة التحديد من جميع الكروت الأخرى
 	                Object.keys(cards).forEach(cardKey=>{
 	                    if(cardKey !== key) {
 	                        cards[cardKey].classList.remove("active");
@@ -1068,7 +1065,6 @@
 	                    }
 	                });
 	
-	                // فتح/إغلاق الكرت الحالي
 	                cards[key].classList.toggle("active",!isOpen);
 	                options[key].classList.toggle("open",!isOpen);
 	            });
@@ -1121,7 +1117,6 @@
         }
 
 	        serverDetails.classList.add("active");
-	        // تم إزالة مستمعي الأحداث الثقيلة لتحسين الأداء
 
         document.getElementById("finalBuyBtn").addEventListener("click",()=>{
             openTermsModal();
@@ -1130,8 +1125,7 @@
 	        const contactInput = document.getElementById('contactInput');
 	        const agreeBtn = document.getElementById('agreeTermsBtn');
 	        const contactError = document.getElementById('contactError');
-	
-	        // تفعيل/تعطيل زر الموافقة بناءً على حقل الاتصال
+
 	        contactInput.addEventListener('input', () => {
 	            if (contactInput.value.trim() !== '') {
 	                agreeBtn.disabled = false;
@@ -1143,7 +1137,6 @@
 	            }
 	        });
 	
-	        // معالج حدث الضغط على زر الموافقة
 	        agreeBtn.addEventListener('click', async () => {
 	            if (contactInput.value.trim() === '') {
 	                contactError.textContent = 'الرجاء إدخال يوزر التليجرام أو رقم الهاتف.';
@@ -1154,30 +1147,32 @@
 	            const priceText = document.getElementById('priceValue').textContent;
 	            const price = priceText.replace('$', '');
 	
-	            // التأكد من أن جميع المتغيرات معرّفة قبل استخدامها
-	            const ram = selectedRam || 'غير محدد';
-	            const country = selectedCountry || 'غير محدد';
-	            const cpu = selectedCPU || 'غير محدد';
-	            const os = selectedOS || 'غير محدد';
-	            const storage = selectedStorage || 'غير محدد';
-	            const disk = selectedDisk || 'غير محدد';
-	            const bandwidth = selectedBandwidth || 'غير محدد';
+	            const orderData = {
+	                contact: contactInput.value.trim(),
+	                ram: selectedRam || 'غير محدد',
+	                country: selectedCountry || 'غير محدد',
+	                cpu: selectedCPU || 'غير محدد',
+	                os: selectedOS || 'غير محدد',
+	                storage: selectedStorage || 'غير محدد',
+	                disk: selectedDisk || 'غير محدد',
+	                bandwidth: selectedBandwidth || 'غير محدد',
+	                price: price
+	            };
 	
-	            const orderDetails = `<b>لديك طلب خادم VPS جديد ✓</b>
-	
-	<b> تواصل العميل :</b> ${contactInput.value.trim()}
-	<b>--- مواصفات الخادم ---</b>
-	<b>- الذاكرة (RAM):</b> ${ram} GB
-	<b>- الموقع:</b> ${country}
-	<b>- الأنوية (vCPU):</b> ${cpu} vCPU
-	<b>- نظام التشغيل:</b> ${os}
-	<b>- مساحة التخزين:</b> ${storage} GB
-	<b>- نوع التخزين:</b> ${disk}
-	<b>- عرض النطاق:</b> ${bandwidth}
-	<b>- السعر:</b> ${price}
-	`;
-	
-	            const isSent = await sendToTelegram(orderDetails);
+	            const message = `<b>عزيزي المدير لديك اوردر VPS جديد ✓</b>
+
+<b>تواصل العميل:</b> ${orderData.contact}
+<b>--- مواصفات الخادم ---</b>
+- RAM: ${orderData.ram} GB
+- Country: ${orderData.country}
+- CPU: ${orderData.cpu} vCPU
+- OS: ${orderData.os}
+- Storage: ${orderData.storage} GB
+- Disk: ${orderData.disk}
+- Bandwidth: ${orderData.bandwidth}
+<b>- price:</b> $${orderData.price}`;
+
+            const isSent = await sendToTelegram(message);
 	            
 	            if (isSent) {
 	                closeTermsModal();
