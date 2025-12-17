@@ -621,11 +621,53 @@
             transition:all .3s;
             box-shadow:0 4px 15px rgba(16,185,129,0.4);
         }
-        .btn-primary:hover{
-            background:linear-gradient(135deg,#059669,#10b981);
-            box-shadow:0 6px 20px rgba(16,185,129,0.6);
-        }
-    </style>
+	        .btn-primary:hover{
+	            background:linear-gradient(135deg,#059669,#10b981);
+	            box-shadow:0 6px 20px rgba(16,185,129,0.6);
+	        }
+	        .contact-options-grid{
+	            display:flex;
+	            flex-direction:column;
+	            gap:15px;
+	            margin-top:20px;
+	        }
+	        .contact-option{
+	            display:flex;
+	            align-items:center;
+	            justify-content:center;
+	            gap:10px;
+	            padding:15px 20px;
+	            border-radius:12px;
+	            font-size:1.1rem;
+	            font-weight:700;
+	            text-decoration:none;
+	            transition:transform .2s,box-shadow .2s;
+	            color:#e5e7ff;
+	            border:1px solid rgba(148,163,184,0.4);
+	        }
+	        .contact-option:hover{
+	            transform:translateY(-2px);
+	            box-shadow:0 5px 15px rgba(59,130,246,0.3);
+	        }
+	        .whatsapp-btn{
+	            background:linear-gradient(135deg,#22c55e,#10b981);
+	        }
+	        .telegram-btn{
+	            background:linear-gradient(135deg,#38bdf8,#0088CC);
+	        }
+	        .contact-icon{
+	            width:30px;
+	            height:30px;
+	            border-radius:50%;
+	            display:flex;
+	            align-items:center;
+	            justify-content:center;
+	            font-weight:800;
+	            color:#fff;
+	            font-size:16px;
+	            flex-shrink:0;
+	        }
+	    </style>
 </head>
 	<body>
 
@@ -875,7 +917,7 @@
 	                    <p class="payment-text">اذا تريد شراء باسياسيل او USDT او تون او لتكون تواصل مع الدعم الفني .</p>
 	                    <div class="payment-buttons-container">
 	                        <button class="btn-show-payments" onclick="openPaymentModal()">طرق الدفع</button>
-	                        <button class="btn-contact-support" onclick="window.open('https://t.me/oofof', '_blank')">تواصل مع الدعم الفني</button>
+	                        <button class="btn-contact-support" onclick="openContactModal()">تواصل مع الدعم الفني</button>
 	                    </div>
 	                </div>
             </div>
@@ -996,6 +1038,23 @@
             </div>
 
             
+            <div class="modal-overlay" id="contactModal">
+                <div class="modal-content">
+                    <button class="modal-close-btn" onclick="closeContactModal()">(X)</button>
+                    <div class="store-info-title">اختر طريقة التواصل</div>
+                    <div class="contact-options-grid">
+                        <a href="https://wa.me/9647716990030" target="_blank" class="contact-option whatsapp-btn" onclick="closeContactModal()">
+                            <span class="contact-icon" style="background-color: #25D366;">W</span>
+                            تواصل واتساب
+                        </a>
+                        <a href="https://t.me/sup_vpstuji" target="_blank" class="contact-option telegram-btn" onclick="closeContactModal()">
+                            <span class="contact-icon" style="background-color: #0088CC;">T</span>
+                            تواصل تليجرام
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="modal-overlay" id="paymentModal">
                 <div class="modal-content">
                     <button class="modal-close-btn" onclick="closePaymentModal()">(X)</button>
@@ -1003,18 +1062,18 @@
                     <div class="payment-methods-list">
                         <div class="info-item">
                             <span class="info-label">زين كاش (Zain Cash)</span>
-                            <span class="info-value">078xxxxxxx</span>
+                            <span class="info-value">متاح</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">آسيا حوالة (Asia Hawala)</span>
-                            <span class="info-value">077xxxxxxx</span>
+                            <span class="info-label">ماستر كارد</span>
+                            <span class="info-value">متاح</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">USDT (TRC20)</span>
-                            <span class="info-value">عنوان المحفظة: Txxxxxxxxx</span>
+                            <span class="info-value">متاح</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">بطاقات التعبئة (تون، آسياسيل)</span>
+                            <span class="info-label">بطاقات التعبئة (تون، آسياسيل،لتك،)</span>
                             <span class="info-value">تواصل مع الدعم الفني</span>
                         </div>
                     </div>
@@ -1031,7 +1090,7 @@
                     <p class="success-message">
                         تم استلام طلبك بنجاح. سيتم التواصل معك عبر بيانات الاتصال التي أدخلتها خلال مدة أقصاها 24 ساعة لإتمام عملية الدفع وتسليم الخادم.
                     </p>
-                    <button class="btn-primary" onclick="closeSuccessModal()">حسناً، فهمت</button>
+                    <button class="btn-primary" onclick="closeSuccessModalAndOpenContact()">حسناً، فهمت</button>
                 </div>
             </div>
         </div>
@@ -1081,7 +1140,7 @@ const CHAT_ID = '6603754497';
         });
 
         function handleStoreManager(){
-            window.open('https://t.me/oofof','_blank');
+            window.open('https://t.me/sup_vpstuji','_blank');
             hamburger.classList.remove("active");
             sidebar.classList.remove("active");
             sidebarOverlay.classList.remove("active");
@@ -1128,6 +1187,11 @@ const CHAT_ID = '6603754497';
 	            document.getElementById('successModal').classList.remove("active");
 	        }
 	
+	        function closeSuccessModalAndOpenContact() {
+	            closeSuccessModal();
+	            openContactModal();
+	        }
+	
 	        const paymentModal = document.getElementById('paymentModal');
 	
 	        function openPaymentModal(){
@@ -1142,6 +1206,23 @@ const CHAT_ID = '6603754497';
 	        paymentModal.addEventListener('click', (e) => {
 	            if (e.target === paymentModal) {
 	                closePaymentModal();
+	            }
+	        });
+	
+	        const contactModal = document.getElementById('contactModal');
+	
+	        function openContactModal(){
+	            contactModal.classList.add("active");
+	            contactModal.scrollTop = 0; 
+	        }
+	
+	        function closeContactModal(){
+	            contactModal.classList.remove("active");
+	        }
+	
+	        contactModal.addEventListener('click', (e) => {
+	            if (e.target === contactModal) {
+	                closeContactModal();
 	            }
 	        });
 
@@ -1279,7 +1360,6 @@ const CHAT_ID = '6603754497';
 	            };
 	            totalPrice *= priceModifiers[selectedCountry] || 1;
 	
-	            // 3. تطبيق معدل المدة (تدبيل السعر)
 	            if (selectedDuration === '3 أشهر') {
 	                totalPrice *= 3; // 3 أشهر = 3 أضعاف سعر الشهر
 	            } else if (selectedDuration === '6 أشهر') {
@@ -1353,10 +1433,7 @@ const CHAT_ID = '6603754497';
 		            if (isSent) {
 		                closeTermsModal();
 		                openSuccessModal();
-		                // إعادة توجيه المستخدم إلى حساب المطور بعد الإرسال الناجح
-		                setTimeout(() => {
-		                    window.open('https://t.me/oofof', '_blank');
-		                }, 1500); // تأخير بسيط بعد ظهور رسالة النجاح
+
 		            } else {
 	                alert('عذراً، حدث خطأ في إرسال الطلب. يرجى التأكد من صحة بيانات البوت أو المحاولة لاحقاً.');
 	            }
@@ -1367,4 +1444,3 @@ const CHAT_ID = '6603754497';
     </script>
 </body>
 </html>
-،
