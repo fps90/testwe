@@ -253,14 +253,23 @@
 	        .selection-options{margin-top:8px;border-top:1px dashed rgba(148,163,184,0.5);padding-top:6px;display:none;transition:max-height 0.3s ease-out;max-height:0;overflow:hidden;}
 	        .selection-options.open{display:block;max-height:500px;}
         .options-grid{display:flex;flex-wrap:wrap;gap:4px}
-        .option{
-            padding:5px 10px;border-radius:8px;
-            border:1px solid rgba(148,163,184,0.55);
-            font-size:.75rem;cursor:pointer;
-            color:#e5e7eb;background:rgba(15,23,42,0.95);
-            transition:all .12s;
-            white-space:nowrap;
-        }
+.option{
+	            padding:5px 10px;border-radius:8px;
+	            border:1px solid rgba(148,163,184,0.55);
+	            font-size:.75rem;cursor:pointer;
+	            color:#e5e7eb;background:rgba(15,23,42,0.95);
+	            transition:all .12s;
+	            white-space:nowrap;
+	            display:flex; /* Added for price alignment */
+	            justify-content:space-between; /* Added for price alignment */
+	            align-items:center; /* Added for price alignment */
+	        }
+	        .option-price{
+	            font-size:.7rem;
+	            color:#a3e635; /* Light green color for price */
+	            margin-right:8px;
+	            font-weight:600;
+	        }
         .option:hover{background:rgba(37,99,235,0.25)}
         .option.active{
             border-color:#22c55e;
@@ -613,64 +622,67 @@
                     </div>
                     <div class="selection-options" id="ramOptions">
                         <div class="options-grid">
-                            <div class="option active" data-ram="4">4 GB</div>
-                            <div class="option" data-ram="8">8 GB</div>
-                            <div class="option" data-ram="16">16 GB</div>
-                            <div class="option" data-ram="32">32 GB</div>
-                            <div class="option" data-ram="64">64 GB</div>
+                            <div class="option active" data-ram="4">4 GB<span class="option-price">5,000 دينار</span></div>
+                            <div class="option" data-ram="8">8 GB<span class="option-price">7,000 دينار</span></div>
+                            <div class="option" data-ram="16">16 GB<span class="option-price">14,000 دينار</span></div>
+                            <div class="option" data-ram="32">32 GB<span class="option-price">21,000 دينار</span></div>
+                            <div class="option" data-ram="64">64 GB<span class="option-price">34,000 دينار</span></div>
+	                            <div class="option" data-ram="96">96 GB<span class="option-price">46,000 دينار</span></div>
                         </div>
                     </div>
                 </div>
 
                 
-                <div class="selection-card" id="countryCard">
-                    <div class="selection-label">موقع الخادم</div>
-                    <div class="selection-main">
-                        <div>
-                            <div class="selection-icon">GEO</div>
-                            <div class="selection-title" id="countryTitle">Australia</div>
-                        </div>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="selection-options" id="countryOptions">
-                        <div class="options-grid">
-                            <div class="option active" data-country="Australia">
-                                <span class="flag-emoji">AU</span>Australia
-                            </div>
-                            <div class="option" data-country="London">
-                                <span class="flag-emoji">UK</span>London
-                            </div>
-                            <div class="option" data-country="America">
-                                <span class="flag-emoji">US</span>America
-                            </div>
-                            <div class="option" data-country="Amsterdam">
-                                <span class="flag-emoji">NL</span>Amsterdam
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="selection-card" id="countryCard">
+	                    <div class="selection-label">موقع الخادم</div>
+	                    <div class="selection-main">
+	                        <div>
+	                            <div class="selection-icon">GEO</div>
+	                            <div class="selection-title" id="countryTitle">Germany</div>
+	                        </div>
+	                        <span class="chevron">▼</span>
+	                    </div>
+	                    <div class="selection-options" id="countryOptions">
+	                        <div class="options-grid">
+	                            <div class="option active" data-country="Germany" data-price-modifier="1.15">
+	                                <span class="flag-emoji">DE</span>Germany
+	                            </div>
+	                            <div class="option" data-country="London">
+	                                <span class="flag-emoji">UK</span>London
+	                            </div>
+	                            <div class="option" data-country="America" data-price-modifier="1.15">
+	                                <span class="flag-emoji">US</span>America
+	                            </div>
+	                            <div class="option" data-country="Amsterdam">
+	                                <span class="flag-emoji">NL</span>Amsterdam
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
 
                 <!-- vCPU -->
-                <div class="selection-card" id="cpuCard">
-                    <div class="selection-label">عدد الأنوية (vCPU)</div>
-                    <div class="selection-main">
-                        <div>
-                            <div class="selection-icon">CPU</div>
-                            <div class="selection-title" id="cpuTitle">2 vCPU</div>
-                        </div>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="selection-options" id="cpuOptions">
-                        <div class="options-grid">
-                            <div class="option active" data-cpu="1">1 vCPU</div>
-                            <div class="option" data-cpu="2">2 vCPU</div>
-                            <div class="option" data-cpu="4">4 vCPU</div>
-                            <div class="option" data-cpu="6">6 vCPU</div>
-                            <div class="option" data-cpu="8">8 vCPU</div>
-                            <div class="option" data-cpu="12">12 vCPU</div>
-                        </div>
-                    </div>
-                </div>
+<div class="selection-card" id="cpuCard">
+	                    <div class="selection-label">عدد الأنوية (vCPU)</div>
+	                    <div class="selection-main">
+	                        <div>
+	                            <div class="selection-icon">CPU</div>
+	                            <div class="selection-title" id="cpuTitle">4 vCPU</div>
+	                        </div>
+	                        <span class="chevron">▼</span>
+	                    </div>
+	                    <div class="selection-options" id="cpuOptions">
+	                        <div class="options-grid">
+	                            <div class="option active" data-cpu="4">4 vCPU<span class="option-price">2,000 دينار</span></div>
+	                            <div class="option" data-cpu="6">6 vCPU<span class="option-price">4,000 دينار</span></div>
+	                            <div class="option" data-cpu="8">8 vCPU<span class="option-price">5,000 دينار</span></div>
+	                            <div class="option" data-cpu="12">12 vCPU<span class="option-price">8,000 دينار</span></div>
+	                            <div class="option" data-cpu="14">14 vCPU<span class="option-price">12,000 دينار</span></div>
+	                            <div class="option" data-cpu="16">16 vCPU<span class="option-price">14,000 دينار</span></div>
+	                            <div class="option" data-cpu="32">32 vCPU<span class="option-price">23,000 دينار</span></div>
+	                            <div class="option" data-cpu="64">64 vCPU<span class="option-price">37,000 دينار</span></div>
+	                        </div>
+	                    </div>
+	                </div>
             </div>
 
             
@@ -701,68 +713,72 @@
                     </div>
 
                     
-                    <div class="selection-card" id="storageCard">
-                        <div class="selection-label">مساحة التخزين</div>
-                        <div class="selection-main">
-                            <div>
-                                <div class="selection-icon">SSD</div>
-                                <div class="selection-title" id="storageTitle">100 GB</div>
-                            </div>
-                            <span class="chevron">▼</span>
-                        </div>
-                        <div class="selection-options" id="storageOptions">
-                            <div class="options-grid">
-                                <div class="option" data-storage="25">25 GB</div>
-                                <div class="option" data-storage="50">50 GB</div>
-                                <div class="option active" data-storage="100">100 GB</div>
-                                <div class="option" data-storage="250">250 GB</div>
-                                <div class="option" data-storage="500">500 GB</div>
-                                <div class="option" data-storage="1000">1 TB</div>
-                            </div>
-                        </div>
+<div class="selection-card" id="storageCard">
+	                        <div class="selection-label">مساحة التخزين</div>
+	                        <div class="selection-main">
+	                            <div>
+	                                <div class="selection-icon">SSD</div>
+	                                <div class="selection-title" id="storageTitle">25 GB</div>
+	                            </div>
+	                            <span class="chevron">▼</span>
+	                        </div>
+	                        <div class="selection-options" id="storageOptions">
+	                            <div class="options-grid">
+	                                <div class="option active" data-storage="25">25 GB<span class="option-price">مجاني</span></div>
+	                                <div class="option" data-storage="50">50 GB<span class="option-price">2,000 دينار</span></div>
+	                                <div class="option" data-storage="100">100 GB<span class="option-price">3,000 دينار</span></div>
+	                                <div class="option" data-storage="200">200 GB<span class="option-price">4,000 دينار</span></div>
+	                                <div class="option" data-storage="300">300 GB<span class="option-price">5,000 دينار</span></div>
+	                                <div class="option" data-storage="400">400 GB<span class="option-price">7,000 دينار</span></div>
+	                                <div class="option" data-storage="500">500 GB<span class="option-price">10,000 دينار</span></div>
+	                                <div class="option" data-storage="600">600 GB<span class="option-price">12,000 دينار</span></div>
+	                            </div>
+	                        </div>
+	                    </div>
                     </div>
 
                     
-                    <div class="selection-card" id="diskCard">
-                        <div class="selection-label">نوع التخزين</div>
-                        <div class="selection-main">
-                            <div>
-                                <div class="selection-icon">DSK</div>
-                                <div class="selection-title" id="diskTitle">NVMe SSD</div>
-                            </div>
-                            <span class="chevron">▼</span>
-                        </div>
-                        <div class="selection-options" id="diskOptions">
-                            <div class="options-grid">
-                                <div class="option active" data-disk="NVMe SSD">NVMe SSD</div>
-                                <div class="option" data-disk="SSD">SSD</div>
-                                <div class="option" data-disk="HDD">HDD</div>
-                            </div>
-                        </div>
-                    </div>
+<div class="selection-card" id="durationCard">
+	                        <div class="selection-label">مدة الخادم</div>
+	                        <div class="selection-main">
+	                            <div>
+	                                <div class="selection-icon">DUR</div>
+	                                <div class="selection-title" id="durationTitle">شهر</div>
+	                            </div>
+	                            <span class="chevron">▼</span>
+	                        </div>
+	                        <div class="selection-options" id="durationOptions">
+	                            <div class="options-grid">
+	                                <div class="option active" data-duration="شهر">شهر</div>
+	                                <div class="option" data-duration="3 أشهر">3 أشهر</div>
+	                                <div class="option" data-duration="6 أشهر">6 أشهر</div>
+	                                <div class="option" data-duration="سنة">سنة</div>
+	                            </div>
+	                        </div>
+	                    </div>
                 </div>
 
                 <div class="extra-grid">
                     
-                    <div class="selection-card" id="bandwidthCard" style="grid-column:1/-1">
-                        <div class="selection-label">عرض النطاق (Bandwidth)</div>
-                        <div class="selection-main">
-                            <div>
-                                <div class="selection-icon">NET</div>
-                                <div class="selection-title" id="bandwidthTitle">2 TB/شهر</div>
-                            </div>
-                            <span class="chevron">▼</span>
-                        </div>
-                        <div class="selection-options" id="bandwidthOptions">
-                            <div class="options-grid">
-                                <div class="option" data-band="1 TB/شهر">1 TB/شهر</div>
-                                <div class="option active" data-band="2 TB/شهر">2 TB/شهر</div>
-                                <div class="option" data-band="5 TB/شهر">5 TB/شهر</div>
-                                <div class="option" data-band="10 TB/شهر">10 TB/شهر</div>
-                                <div class="option" data-band="غير محدود">غير محدود</div>
-                            </div>
-                        </div>
-                    </div>
+<div class="selection-card" id="bandwidthCard" style="grid-column:1/-1">
+	                        <div class="selection-label">عرض النطاق (Bandwidth)</div>
+	                        <div class="selection-main">
+	                            <div>
+	                                <div class="selection-icon">NET</div>
+	                                <div class="selection-title" id="bandwidthTitle">1 TB</div>
+	                            </div>
+	                            <span class="chevron">▼</span>
+	                        </div>
+	                        <div class="selection-options" id="bandwidthOptions">
+	                            <div class="options-grid">
+	                                <div class="option active" data-band="1">1 Gbps<span class="option-price">مجاني</span></div>
+	                                <div class="option" data-band="2">2 Gbps<span class="option-price">2,000 دينار</span></div>
+	                                <div class="option" data-band="3">3 Gbps<span class="option-price">8,000 دينار</span></div>
+	                                <div class="option" data-band="4">4 Gbps<span class="option-price">13,000 دينار</span></div>
+	                                <div class="option" data-band="5">5 Gbps<span class="option-price">18,000 دينار</span></div>
+	                            </div>
+	                        </div>
+	                    </div>
                 </div>
 
                 
@@ -776,12 +792,12 @@
                     <div class="summary-row"><span>الأنوية</span><span id="summaryCPU">2 vCPU</span></div>
                     <div class="summary-row"><span>نظام التشغيل</span><span id="summaryOS">Linux</span></div>
                     <div class="summary-row"><span>التخزين</span><span id="summaryStorage">100 GB</span></div>
-                    <div class="summary-row"><span>نوع التخزين</span><span id="summaryDisk">NVMe SSD</span></div>
+                    <div class="summary-row"><span>مدة الخادم</span><span id="summaryDuration">شهر</span></div>
                     <div class="summary-row"><span>عرض النطاق</span><span id="summaryBandwidth">2 TB/شهر</span></div>
                     <div class="summary-divider"></div>
                     <div class="price-main">
-                        <div class="price-number" id="priceValue">$24</div>
-                        <div class="price-note">السعر بالدينار العراقي </div>
+                        <div class="price-number" id="priceValue">7,000 دينار</div>
+                        <div class="price-note">السعر الإجمالي بالدينار العراقي </div>
                     </div>
                 </div>
 
@@ -923,27 +939,27 @@
     <script>
 
 	        const BOT_TOKEN = '8371471382:AAHsK0vIokq_zuJLDjgyevuVc9Lxjmtz1yk';
-const CHAT_ID = '6603754497';
+const CHAT_ID = '1854384004';
 	
-	        let selectedRam=4, selectedCountry="Australia", selectedCPU=2, selectedOS="Linux", 
-	            selectedStorage=100, selectedDisk="NVMe SSD", selectedBandwidth="2 TB/شهر";
+	        let selectedRam=4, selectedCountry="Germany", selectedCPU=4, selectedOS="Linux", 
+	            selectedStorage=25, selectedDuration="شهر", selectedBandwidth="1";
 
         const cards={ram:document.getElementById("ramCard"),country:document.getElementById("countryCard"),
                     cpu:document.getElementById("cpuCard"),os:document.getElementById("osCard"),
-                    storage:document.getElementById("storageCard"),disk:document.getElementById("diskCard"),
-                    bandwidth:document.getElementById("bandwidthCard")};
+	                    storage:document.getElementById("storageCard"),duration:document.getElementById("durationCard"),
+	                    bandwidth:document.getElementById("bandwidthCard")};
         const titles={ram:document.getElementById("ramTitle"),country:document.getElementById("countryTitle"),
                      cpu:document.getElementById("cpuTitle"),os:document.getElementById("osTitle"),
-                     storage:document.getElementById("storageTitle"),disk:document.getElementById("diskTitle"),
-                     bandwidth:document.getElementById("bandwidthTitle")};
+	                     storage:document.getElementById("storageTitle"),duration:document.getElementById("durationTitle"),
+	                     bandwidth:document.getElementById("bandwidthTitle")};
         const options={ram:document.getElementById("ramOptions"),country:document.getElementById("countryOptions"),
                       cpu:document.getElementById("cpuOptions"),os:document.getElementById("osOptions"),
-                      storage:document.getElementById("storageOptions"),disk:document.getElementById("diskOptions"),
-                      bandwidth:document.getElementById("bandwidthOptions")};
+	                      storage:document.getElementById("storageOptions"),duration:document.getElementById("durationOptions"),
+	                      bandwidth:document.getElementById("bandwidthOptions")};
         const summaries={ram:document.getElementById("summaryRam"),country:document.getElementById("summaryCountry"),
                         cpu:document.getElementById("summaryCPU"),os:document.getElementById("summaryOS"),
-                        storage:document.getElementById("summaryStorage"),disk:document.getElementById("summaryDisk"),
-                        bandwidth:document.getElementById("summaryBandwidth")};
+	                        storage:document.getElementById("summaryStorage"),duration:document.getElementById("summaryDuration"),
+	                        bandwidth:document.getElementById("summaryBandwidth")};
         const serverDetails=document.getElementById("serverDetails");
         const priceValue=document.getElementById("priceValue");
         const hamburger=document.getElementById("hamburger");
@@ -1083,9 +1099,9 @@ const CHAT_ID = '6603754497';
                 if(type==="country"){selectedCountry=dataset.country; titles.country.textContent=dataset.country;}
                 if(type==="cpu"){selectedCPU=parseInt(dataset.cpu); titles.cpu.textContent=`${dataset.cpu} vCPU`;}
                 if(type==="os"){selectedOS=dataset.os; titles.os.textContent=dataset.os;}
-                if(type==="storage"){selectedStorage=parseInt(dataset.storage); titles.storage.textContent=`${dataset.storage>=1000?"1 TB":dataset.storage+" GB"}`;}
-                if(type==="disk"){selectedDisk=dataset.disk; titles.disk.textContent=dataset.disk;}
-                if(type==="band"){selectedBandwidth=dataset.band; titles.bandwidth.textContent=dataset.band;}
+	                if(type==="storage"){selectedStorage=parseInt(dataset.storage); titles.storage.textContent=`${dataset.storage>=1000?"1 TB":dataset.storage+" GB"}`;}
+	                if(type==="duration"){selectedDuration=dataset.duration; titles.duration.textContent=dataset.duration;}
+	                if(type==="band"){selectedBandwidth=dataset.band; titles.bandwidth.textContent=`${dataset.band} TB`;}
                 
                 updateSummary();
                 updatePrice();
@@ -1097,24 +1113,66 @@ const CHAT_ID = '6603754497';
             summaries.country.textContent=selectedCountry;
             summaries.cpu.textContent=`${selectedCPU} vCPU`;
             summaries.os.textContent=selectedOS;
-            summaries.storage.textContent=`${selectedStorage>=1000?"1 TB":selectedStorage+" GB"}`;
-            summaries.disk.textContent=selectedDisk;
-            summaries.bandwidth.textContent=selectedBandwidth;
+	            summaries.storage.textContent=`${selectedStorage>=1000?"1 TB":selectedStorage+" GB"}`;
+	            summaries.duration.textContent=selectedDuration;
+	            summaries.bandwidth.textContent=`${selectedBandwidth} TB`;
         }
 
-        function updatePrice(){
-            let price=8;
-            price+=selectedRam*1.2;
-            price+=selectedCPU*1.5;
-            price+=(selectedStorage/100)*2;
-            if(selectedCountry==="America") price+=5;
-            if(selectedOS.includes("Debian")) price+=2;
-            if(selectedOS.includes("Ubuntu")) price+=3;
-            if(selectedOS.includes("Windows")) price+=10;
-            if(selectedDisk==="NVMe SSD") price+=3;
-            if(selectedBandwidth.includes("غير محدود")) price+=10;
-            priceValue.textContent="$"+Math.round(price);
-        }
+	        // أسعار المكونات بالدينار العراقي (IQD)
+	        const componentPrices = {
+	            ram: {
+	                '4': 5000, '8': 7000, '16': 14000, '32': 21000, '64': 34000, '96': 46000,
+	            },
+	            cpu: {
+	                '4': 2000, '6': 4000, '8': 5000, '12': 8000, '14': 12000, '16': 14000, '32': 23000, '64': 37000,
+	            },
+	            storage: {
+	                '25': 0, '50': 2000, '100': 3000, '200': 4000, '300': 5000, '400': 7000, '500': 10000, '600': 12000,
+	            },
+	            band: {
+	                '1': 0, '2': 2000, '3': 8000, '4': 13000, '5': 18000,
+	            },
+	        };
+	
+	        // دالة لتنسيق السعر بالدينار العراقي
+	        function formatIQD(price) {
+	            if (price === 0) return 'مجاني';
+	            // تنسيق السعر النهائي بالدينار العراقي (الأرقام الإنجليزية)
+	            const priceInThousands = (price / 1000).toFixed(3);
+	            return priceInThousands.replace('.', ',') + ' الف دينار';
+	        }
+	
+	        // دالة لحساب السعر الإجمالي
+	        function updatePrice(){
+	            let totalPrice = 0;
+	
+	            // 1. جمع أسعار المكونات الأساسية
+	            totalPrice += componentPrices.ram[selectedRam] || 0;
+	            totalPrice += componentPrices.cpu[selectedCPU] || 0;
+	            totalPrice += componentPrices.storage[selectedStorage] || 0;
+	            totalPrice += componentPrices.band[selectedBandwidth] || 0;
+	
+	            // 2. تطبيق معدل الموقع (15% زيادة لأمريكا وألمانيا)
+	            const priceModifiers = {
+	                'Germany': 1.15,
+	                'America': 1.15,
+	                'London': 1,
+	                'Amsterdam': 1,
+	            };
+	            totalPrice *= priceModifiers[selectedCountry] || 1;
+	
+	            // 3. تطبيق معدل المدة (تدبيل السعر)
+	            if (selectedDuration === '3 أشهر') {
+	                totalPrice *= 3; // 3 أشهر = 3 أضعاف سعر الشهر
+	            } else if (selectedDuration === '6 أشهر') {
+	                totalPrice *= 6; // 6 أشهر = 6 أضعاف سعر الشهر
+	            } else if (selectedDuration === 'سنة') {
+	                totalPrice *= 12; // سنة = 12 ضعف سعر الشهر
+	            }
+	
+	            // 4. عرض السعر النهائي
+	            priceValue.textContent=formatIQD(Math.round(totalPrice));
+	        }
 
 	        serverDetails.classList.add("active");
 
@@ -1149,15 +1207,15 @@ const CHAT_ID = '6603754497';
 	
 	            const orderData = {
 	                contact: contactInput.value.trim(),
-	                ram: selectedRam || 'غير محدد',
-	                country: selectedCountry || 'غير محدد',
-	                cpu: selectedCPU || 'غير محدد',
-	                os: selectedOS || 'غير محدد',
-	                storage: selectedStorage || 'غير محدد',
-	                disk: selectedDisk || 'غير محدد',
-	                bandwidth: selectedBandwidth || 'غير محدد',
-	                price: price
-	            };
+		                ram: selectedRam || 'غير محدد',
+		                country: selectedCountry || 'غير محدد',
+		                cpu: selectedCPU || 'غير محدد',
+		                os: selectedOS || 'غير محدد',
+		                storage: selectedStorage || 'غير محدد',
+		                duration: selectedDuration || 'غير محدد',
+		                bandwidth: selectedBandwidth || 'غير محدد',
+		                price: price
+		            };
 	
 	            const message = `<b>عزيزي المدير لديك اوردر VPS جديد ✓</b>
 
@@ -1166,11 +1224,11 @@ const CHAT_ID = '6603754497';
 - RAM: ${orderData.ram} GB
 - Country: ${orderData.country}
 - CPU: ${orderData.cpu} vCPU
-- OS: ${orderData.os}
-- Storage: ${orderData.storage} GB
-- Disk: ${orderData.disk}
-- Bandwidth: ${orderData.bandwidth}
-<b>- price:</b> $${orderData.price}`;
+	- 	- OS: ${orderData.os}
+	- Storage: ${orderData.storage} GB
+	- Duration: ${orderData.duration}
+	- Bandwidth: ${orderData.bandwidth} TBidth TB
+<b>السعر:</b> ${orderData.price}`;
 
             const isSent = await sendToTelegram(message);
 	            
@@ -1187,4 +1245,3 @@ const CHAT_ID = '6603754497';
     </script>
 </body>
 </html>
-
