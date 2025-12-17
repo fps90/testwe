@@ -20,64 +20,7 @@
         }
         
         
-        .stars-container{
-            position:fixed;
-            inset:0;
-            pointer-events:none;
-            z-index:0;
-            perspective:1000px;
-        }
-        
-        .star{
-            position:absolute;
-            width:2px;
-            height:2px;
-            background:#fff;
-            border-radius:50%;
-            box-shadow:0 0 2px #fff,0 0 4px rgba(255,255,255,0.8),0 0 8px rgba(100,200,255,0.6);
-            animation:twinkle-3d 3s infinite;
-        }
-        
-        @keyframes twinkle-3d{
-            0%,100%{
-                opacity:0.3;
-                box-shadow:0 0 2px #fff,0 0 4px rgba(255,255,255,0.4),0 0 6px rgba(100,200,255,0.2);
-                transform:translateZ(0px);
-            }
-            50%{
-                opacity:1;
-                box-shadow:0 0 4px #fff,0 0 8px rgba(255,255,255,0.8),0 0 16px rgba(100,200,255,0.8);
-                transform:translateZ(20px);
-            }
-        }
-        
-        
-        .background-gradient{
-            position:fixed;
-            inset:0;
-            pointer-events:none;
-            z-index:0;
-            background:
-                radial-gradient(circle at 15% 20%,rgba(59,130,246,0.15) 0,transparent 50%),
-                radial-gradient(circle at 85% 10%,rgba(168,85,247,0.15) 0,transparent 50%),
-                radial-gradient(circle at 50% 80%,rgba(34,197,94,0.08) 0,transparent 50%),
-                radial-gradient(circle at 30% 60%,rgba(236,72,153,0.1) 0,transparent 50%);
-            mix-blend-mode:screen;
-        }
-        
-        .haze{
-            position:fixed;
-            inset:auto 0 0 0;
-            height:50vh;
-            pointer-events:none;
-            z-index:0;
-            background:
-                radial-gradient(circle at 50% 0,rgba(37,99,235,0.2),transparent 60%),
-                radial-gradient(circle at 10% 0,rgba(168,85,247,0.15),transparent 60%),
-                radial-gradient(circle at 90% 100%,rgba(236,72,153,0.1),transparent 60%);
-            mix-blend-mode:screen;
-            opacity:.6;
-        }
+	        /* تم إزالة تأثيرات النجوم والخلفيات المعقدة لتحسين الأداء */
         
         
         .header{
@@ -295,13 +238,13 @@
         .section-title{font-size:1rem;margin-bottom:10px;color:#e5e7eb;font-weight:600}
         .selection-grid{display:grid;gap:12px}
         @media(min-width:950px){.selection-grid{grid-template-columns:repeat(3,1fr)}}
-        .selection-card{
-            background:radial-gradient(circle at top,rgba(37,99,235,0.3),rgba(15,23,42,0.98));
-            border-radius:16px;padding:16px 14px;
-            border:1px solid rgba(148,163,184,0.4);
-            cursor:pointer;transition:transform .15s;
-        }
-        .selection-card:hover{transform:translateY(-2px)}
+	        .selection-card{
+	            background:rgba(15,23,42,0.95);
+	            border-radius:16px;padding:16px 14px;
+	            border:1px solid rgba(148,163,184,0.4);
+	            cursor:pointer;transition:transform .15s;
+	        }
+	        .selection-card:hover{transform:translateY(-1px);box-shadow:0 0 5px rgba(56,189,248,0.2);}
         .selection-label{font-size:.8rem;margin-bottom:6px;color:#cbd5f5;font-weight:600}
         .selection-main{display:flex;align-items:center;justify-content:space-between}
         .selection-icon{
@@ -311,8 +254,8 @@
             color:#e5e7eb;border:1px solid rgba(148,163,184,0.7);
         }
         .selection-title{font-weight:600;color:#e5e7eb;font-size:.9rem}
-        .selection-options{margin-top:8px;border-top:1px dashed rgba(148,163,184,0.5);padding-top:6px;display:none}
-        .selection-options.open{display:block}
+	        .selection-options{margin-top:8px;border-top:1px dashed rgba(148,163,184,0.5);padding-top:6px;display:none;transition:max-height 0.3s ease-out;max-height:0;overflow:hidden;}
+	        .selection-options.open{display:block;max-height:500px;}
         .options-grid{display:flex;flex-wrap:wrap;gap:4px}
         .option{
             padding:5px 10px;border-radius:8px;
@@ -329,7 +272,12 @@
             color:#bbf7d0;
         }
         .chevron{font-size:11px;color:#9ca3af;transition:transform .2s}
-        .selection-card.active .chevron{transform:rotate(180deg)}
+	        .selection-card.active .chevron{transform:rotate(180deg)}
+	        .selection-card.active{
+	            border-color:#38bdf8;
+	            box-shadow:0 0 10px rgba(56,189,248,0.5);
+	            background:radial-gradient(circle at top,rgba(56,189,248,0.25),rgba(15,23,42,0.95));
+	        }
 
         .server-details{margin-top:20px;border-radius:20px;padding:20px 16px;
             background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(15,23,42,0.93));
@@ -603,11 +551,7 @@
         }
     </style>
 </head>
-<body>
-    
-    <div class="stars-container" id="starsContainer"></div>
-    <div class="background-gradient"></div>
-    <div class="haze"></div>
+	<body>
 
     <!-- Header -->
     <div class="header">
@@ -981,37 +925,11 @@
     </div>
 
     <script>
-        const BOT_TOKEN = '8371471382:AAHsK0vIokq_zuJLDjgyevuVc9Lxjmtz1yk';
-        const CHAT_ID = '1854384004';
-        function createStars(){
-            const container=document.getElementById('starsContainer');
-            const starCount=150;
-            
-            for(let i=0;i<starCount;i++){
-                const star=document.createElement('div');
-                star.className='star';
-                
-                const x=Math.random()*100;
-                const y=Math.random()*100;
-                const size=Math.random()*2+1;
-                const duration=Math.random()*4+2;
-                const delay=Math.random()*5;
-                
-                star.style.left=x+'%';
-                star.style.top=y+'%';
-                star.style.width=size+'px';
-                star.style.height=size+'px';
-                star.style.animationDuration=duration+'s';
-                star.style.animationDelay=delay+'s';
-                
-                container.appendChild(star);
-            }
-        }
-        
-        createStars();
-
-        let selectedRam=4, selectedCountry="Australia", selectedCPU=2, selectedOS="Linux", 
-            selectedStorage=100, selectedDisk="NVMe SSD", selectedBandwidth="2 TB/شهر";
+	        const BOT_TOKEN = '8371471382:AAHsK0vIokq_zuJLDjgyevuVc9Lxjmtz1yk';
+	        const CHAT_ID = '1854384004';
+	
+	        let selectedRam=4, selectedCountry="Australia", selectedCPU=2, selectedOS="Linux", 
+	            selectedStorage=100, selectedDisk="NVMe SSD", selectedBandwidth="2 TB/شهر";
 
         const cards={ram:document.getElementById("ramCard"),country:document.getElementById("countryCard"),
                     cpu:document.getElementById("cpuCard"),os:document.getElementById("osCard"),
@@ -1113,17 +1031,13 @@
                 });
                 const data = await response.json();
                 if (!data.ok) {
-                    // إذا فشل الإرسال، نعرض رسالة خطأ في الكونسول
-                    console.error('Telegram API error:', data.description);
-                    // يمكن إضافة تنبيه للمستخدم هنا إذا أردت
-                    // alert('فشل إرسال الطلب إلى تليجرام. الرجاء المحاولة لاحقاً.');
-                    return false; // فشل الإرسال
+                    // لا نستخدم console.error هنا لتجنب أي مشاكل غير متوقعة
+                    return false;
                 }
-                return true; // نجاح الإرسال
+                return true;
             } catch (error) {
-                console.error('Failed to send message to Telegram:', error);
-                // alert('فشل إرسال الطلب إلى تليجرام. الرجاء المحاولة لاحقاً.');
-                return false; // فشل الإرسال
+                // لا نستخدم console.error هنا لتجنب أي مشاكل غير متوقعة
+                return false;
             }
         }
 
@@ -1133,14 +1047,23 @@
             }
         });
 
-        Object.keys(cards).forEach(key=>{
-            cards[key].addEventListener("click",()=>{
-                const isOpen=options[key].classList.contains("open");
-                Object.keys(options).forEach(opt=>options[opt].classList.remove("open"));
-                cards[key].classList.toggle("active",!isOpen);
-                options[key].classList.toggle("open",!isOpen);
-            });
-        });
+	        Object.keys(cards).forEach(key=>{
+	            cards[key].addEventListener("click",()=>{
+	                const isOpen=options[key].classList.contains("open");
+	                
+	                // إزالة التحديد من جميع الكروت الأخرى
+	                Object.keys(cards).forEach(cardKey=>{
+	                    if(cardKey !== key) {
+	                        cards[cardKey].classList.remove("active");
+	                        options[cardKey].classList.remove("open");
+	                    }
+	                });
+	
+	                // فتح/إغلاق الكرت الحالي
+	                cards[key].classList.toggle("active",!isOpen);
+	                options[key].classList.toggle("open",!isOpen);
+	            });
+	        });
 
         document.querySelectorAll(".option").forEach(option=>{
             option.addEventListener("click",e=>{
@@ -1188,78 +1111,67 @@
             priceValue.textContent="$"+Math.round(price);
         }
 
-        setTimeout(()=>serverDetails.classList.add("active"),1000);
-        document.addEventListener("wheel",()=>{
-            if(!serverDetails.classList.contains("active")) serverDetails.classList.add("active");
-        });
+	        serverDetails.classList.add("active");
+	        // تم إزالة مستمعي الأحداث الثقيلة لتحسين الأداء
 
         document.getElementById("finalBuyBtn").addEventListener("click",()=>{
             openTermsModal();
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const contactInput = document.getElementById('contactInput');
-            const agreeBtn = document.getElementById('agreeTermsBtn');
-            const contactError = document.getElementById('contactError');
-
-
-            contactInput.addEventListener('input', () => {
-                const contactInput = document.getElementById('contactInput');
-                const agreeBtn = document.getElementById('agreeTermsBtn');
-                const contactError = document.getElementById('contactError');
-
-                if (contactInput.value.trim() !== '') {
-                    agreeBtn.disabled = false;
-                    contactError.textContent = '';
-                    contactInput.classList.remove('error-highlight');
-                } else {
-                    agreeBtn.disabled = true;
-                    contactInput.classList.add('error-highlight');
-                }
-            });
-
-
-            agreeBtn.addEventListener('click', async () => {
-                const contactInput = document.getElementById('contactInput');
-                const contactError = document.getElementById('contactError');
-
-                if (contactInput.value.trim() === '') {
-                    contactError.textContent = 'الرجاء إدخال يوزر التليجرام أو رقم الهاتف.';
-                    contactInput.classList.add('error-highlight');
-                    return;
-                }
-
-                const priceText = document.getElementById('priceValue').textContent;
-                const price = priceText.replace('$', '');
-
-                const orderDetails = `<b>لديك طلب خادم VPS جديد ✓</b>
-
-<b> تواصل العميل :</b> ${contactInput.value.trim()}
-<b>--- مواصفات الخادم ---</b>
-<b>- الذاكرة (RAM):</b> ${selectedRam} GB
-<b>- الموقع:</b> ${selectedCountry}
-<b>- الأنوية (vCPU):</b> ${selectedCPU} vCPU
-<b>- نظام التشغيل:</b> ${selectedOS}
-<b>- مساحة التخزين:</b> ${selectedStorage} GB
-<b>- نوع التخزين:</b> ${selectedDisk}
-<b>- عرض النطاق:</b> ${selectedBandwidth}
-<b>- السعر:</b> ${price}
-`;
-
-                const isSent = await sendToTelegram(orderDetails);
-                
-                if (isSent) {
-                    closeTermsModal();
-                    openSuccessModal();
-                } else {
-                    // إذا فشل الإرسال، يمكن إبقاء النافذة مفتوحة أو إظهار رسالة خطأ
-                    alert('عذراً، حدث خطأ في إرسال الطلب. يرجى التأكد من صحة بيانات البوت أو المحاولة لاحقاً.');
-                }
-            });
-        });
+	        const contactInput = document.getElementById('contactInput');
+	        const agreeBtn = document.getElementById('agreeTermsBtn');
+	        const contactError = document.getElementById('contactError');
+	
+	        // تفعيل/تعطيل زر الموافقة بناءً على حقل الاتصال
+	        contactInput.addEventListener('input', () => {
+	            if (contactInput.value.trim() !== '') {
+	                agreeBtn.disabled = false;
+	                contactError.textContent = '';
+	                contactInput.classList.remove('error-highlight');
+	            } else {
+	                agreeBtn.disabled = true;
+	                contactInput.classList.add('error-highlight');
+	            }
+	        });
+	
+	        // معالج حدث الضغط على زر الموافقة
+	        agreeBtn.addEventListener('click', async () => {
+	            if (contactInput.value.trim() === '') {
+	                contactError.textContent = 'الرجاء إدخال يوزر التليجرام أو رقم الهاتف.';
+	                contactInput.classList.add('error-highlight');
+	                return;
+	            }
+	
+	            const priceText = document.getElementById('priceValue').textContent;
+	            const price = priceText.replace('$', '');
+	
+	            const orderDetails = `<b>لديك طلب خادم VPS جديد ✓</b>
+	
+	<b> تواصل العميل :</b> ${contactInput.value.trim()}
+	<b>--- مواصفات الخادم ---</b>
+	<b>- الذاكرة (RAM):</b> ${selectedRam} GB
+	<b>- الموقع:</b> ${selectedCountry}
+	<b>- الأنوية (vCPU):</b> ${selectedCPU} vCPU
+	<b>- نظام التشغيل:</b> ${selectedOS}
+	<b>- مساحة التخزين:</b> ${selectedStorage} GB
+	<b>- نوع التخزين:</b> ${selectedDisk}
+	<b>- عرض النطاق:</b> ${selectedBandwidth}
+	<b>- السعر:</b> ${price}
+	`;
+	
+	            const isSent = await sendToTelegram(orderDetails);
+	            
+	            if (isSent) {
+	                closeTermsModal();
+	                openSuccessModal();
+	            } else {
+	                alert('عذراً، حدث خطأ في إرسال الطلب. يرجى التأكد من صحة بيانات البوت أو المحاولة لاحقاً.');
+	            }
+	        });
 
         updateSummary();
         updatePrice();
     </script>
 </body>
 </html>
+
