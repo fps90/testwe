@@ -995,11 +995,13 @@
 
         const termsModal = document.getElementById('termsModal');
 
-        function openTermsModal(){
-
-            termsModal.classList.add("active");
-            termsModal.scrollTop = 0; 
-        }
+	        function openTermsModal(){
+	            // تصعيد الصفحة إلى الأعلى
+	            window.scrollTo({ top: 0, behavior: 'smooth' });
+	
+	            termsModal.classList.add("active");
+	            termsModal.scrollTop = 0; 
+	        }
 
         function closeTermsModal(){
             termsModal.classList.remove("active");
@@ -1022,23 +1024,30 @@
             };
 
             try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-                const data = await response.json();
-                if (!data.ok) {
-                    // لا نستخدم console.error هنا لتجنب أي مشاكل غير متوقعة
-                    return false;
-                }
-                return true;
-            } catch (error) {
-                // لا نستخدم console.error هنا لتجنب أي مشاكل غير متوقعة
-                return false;
-            }
+	                const response = await fetch(url, {
+	                    method: 'POST',
+	                    headers: {
+	                        'Content-Type': 'application/json'
+	                    },
+	                    body: JSON.stringify(payload)
+	                });
+	
+	                if (!response.ok) {
+	                    const errorText = await response.text();
+	                    console.error('HTTP Error:', response.status, errorText);
+	                    return false;
+	                }
+	
+	                const data = await response.json();
+		                if (!data.ok) {
+		                    console.error('Telegram API Error:', data);
+		                    return false;
+		                }
+	                return true;
+	            } catch (error) {
+	                console.error('Network or Fetch Error:', error);
+	                return false;
+	            }
         }
 
         termsModal.addEventListener('click', (e) => {
@@ -1145,17 +1154,26 @@
 	            const priceText = document.getElementById('priceValue').textContent;
 	            const price = priceText.replace('$', '');
 	
+	            // التأكد من أن جميع المتغيرات معرّفة قبل استخدامها
+	            const ram = selectedRam || 'غير محدد';
+	            const country = selectedCountry || 'غير محدد';
+	            const cpu = selectedCPU || 'غير محدد';
+	            const os = selectedOS || 'غير محدد';
+	            const storage = selectedStorage || 'غير محدد';
+	            const disk = selectedDisk || 'غير محدد';
+	            const bandwidth = selectedBandwidth || 'غير محدد';
+	
 	            const orderDetails = `<b>لديك طلب خادم VPS جديد ✓</b>
 	
 	<b> تواصل العميل :</b> ${contactInput.value.trim()}
 	<b>--- مواصفات الخادم ---</b>
-	<b>- الذاكرة (RAM):</b> ${selectedRam} GB
-	<b>- الموقع:</b> ${selectedCountry}
-	<b>- الأنوية (vCPU):</b> ${selectedCPU} vCPU
-	<b>- نظام التشغيل:</b> ${selectedOS}
-	<b>- مساحة التخزين:</b> ${selectedStorage} GB
-	<b>- نوع التخزين:</b> ${selectedDisk}
-	<b>- عرض النطاق:</b> ${selectedBandwidth}
+	<b>- الذاكرة (RAM):</b> ${ram} GB
+	<b>- الموقع:</b> ${country}
+	<b>- الأنوية (vCPU):</b> ${cpu} vCPU
+	<b>- نظام التشغيل:</b> ${os}
+	<b>- مساحة التخزين:</b> ${storage} GB
+	<b>- نوع التخزين:</b> ${disk}
+	<b>- عرض النطاق:</b> ${bandwidth}
 	<b>- السعر:</b> ${price}
 	`;
 	
