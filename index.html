@@ -1101,17 +1101,17 @@
                     <div class="payment-method-card active" data-payment="IQD" onclick="selectPaymentMethod('IQD')">
                         <div class="payment-icon">IQD</div>
                         <div class="payment-title">دينار</div>
-                        <div class="payment-desc">زين كاش / ماستر</div>
+                        <div class="payment-desc">زين كاش - ماستر</div>
                     </div>
                     <div class="payment-method-card" data-payment="USD" onclick="selectPaymentMethod('USD')">
                         <div class="payment-icon">USD</div>
                         <div class="payment-title">دولار</div>
-                        <div class="payment-desc">USDT (TRC20)</div>
+                        <div class="payment-desc">USDT</div>
                     </div>
                     <div class="payment-method-card" data-payment="ASIA" onclick="selectPaymentMethod('ASIA')">
                         <div class="payment-icon">ASIA</div>
                         <div class="payment-title">اسياسيل</div>
-                        <div class="payment-desc">حواله</div>
+                        <div class="payment-desc">تحويل - كارتات</div>
                     </div>
                 </div>
 
@@ -1225,7 +1225,7 @@
                         <div class="selection-options" id="countryOptions">
                             <div class="options-grid">
                                 <div class="option active" data-country="Germany" data-price-modifier="1">Germany<span class="option-price">مجاني</span></div>
-                                <div class="option" data-country="USA" data-price-modifier="1.15">USA<span class="option-price">×1.15</span></div>
+                                <div class="option" data-country="USA" data-price-modifier="1.15">USA<span class="option-price">15%</span></div>
                             </div>
                         </div>
                     </div>
@@ -1286,7 +1286,7 @@
                         </div>
                         <div class="summary-row">
                             <span>طريقة الدفع:</span>
-                            <span id="summaryPaymentMethod">دينار (زين كاش / ماستر)</span>
+                            <span id="summaryPaymentMethod">دينار (زين كاش - ماستر)</span>
                         </div>
                         <div class="summary-row">
                             <span>الذاكرة:</span>
@@ -1408,7 +1408,7 @@
                     <div class="payment-method-header">
                         <div class="payment-icon">USD</div>
                         <div class="payment-info">
-                            <div class="payment-name">دولار أمريكي (USD) - USDT TRC20</div>
+                            <div class="payment-name">دولار أمريكي (USD)</div>
                         </div>
                     </div>
 
@@ -1618,7 +1618,7 @@
                     <span class="info-value">متاح</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">USDT (TRC20)</span>
+                    <span class="info-label">USDT</span>
                     <span class="info-value">متاح</span>
                 </div>
                 <div class="info-item">
@@ -1821,7 +1821,7 @@
             summaries.bandwidth.textContent=`${selectedBandwidth} TB`;
             
             const paymentMethodText = {
-                'IQD': 'دينار (زين كاش / ماستر)',
+                'IQD': 'دينار (زين كاش - ماستر)',
                 'USD': 'دولار (USDT)',
                 'ASIA': 'اسياسيل حواله'
             };
